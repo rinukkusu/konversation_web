@@ -4,7 +4,7 @@ import 'package:konversation_web/konversation_web.dart';
 
 main() async {
   HttpServer server;
-  InternetAddress host = InternetAddress.LOOPBACK_IP_V4;
+  InternetAddress host = InternetAddress.ANY_IP_V4;
   int port = 3000;
 
   if (Platform.environment['ANGEL_ENV'] == 'production') {

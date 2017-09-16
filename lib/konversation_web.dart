@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:angel_common/angel_common.dart';
 import 'package:angel_mustache/angel_mustache.dart';
+import 'package:deploy_lib/state.dart';
 
 /// Generates and configures an Angel server.
 Future<Angel> createServer() async {
@@ -17,6 +18,14 @@ Future<Angel> createServer() async {
 
   // All loaded configuration will be added to `app.properties`.
   print('Loaded configuration: ${app.properties}');
+
+  var buildDir = app.properties['builddir'];
+
+  await app.configure(
+      new VirtualDirectory(source: new Directory('$buildDir\\konversation'), streamToIO: true));
+
+  await app.configure(
+      new VirtualDirectory(source: new Directory('web'), streamToIO: true));
 
   await app.configure(mustache(new Directory('lib/views')));
 
@@ -34,7 +43,8 @@ Future<Angel> createServer() async {
 }
 
 requestHandler(ResponseContext res) async {
-  var builddir = new Directory(res.app.properties['builddir']);
-  
-  return res.render('index', {});
+  var dir = res.app.properties['builddir'];
+  var state = State.load('$dir\\state.json');
+
+  return res.render('index', {'builds': state.versionHistory});
 }

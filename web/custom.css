@@ -1,0 +1,11 @@
+#logo {
+    width: 48px; 
+    display: inline-block; 
+    vertical-align: inherit; 
+    margin-right: 12px;
+}
+
+#brand {
+    line-height: 2rem; 
+    display: inline-block;
+}

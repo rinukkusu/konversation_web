@@ -1,3 +1,3 @@
 # Default configuration; loaded at startup
 debug: true
-builddir: "/home/rinukkusu/kde-builds/output"
+builddir: "C:\\vagrant\\output"

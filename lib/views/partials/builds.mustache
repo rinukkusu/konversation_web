@@ -1,2 +1,27 @@
-test
-{{> b2}}
+<table class="table">
+
+    <thead class="thead-default">
+        <tr>
+            <th>Date</th>
+            <th>Branch / Commit</th>
+            <th>Platform</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+{{#builds}}
+        <tr>
+            <td title="{{createdOn}}">{{shortDate}}</td>
+            <td>
+                <a href="https://cgit.kde.org/konversation.git/log/?h={{branch}}">{{branch}}</a>
+                /
+                <a href="https://cgit.kde.org/konversation.git/commit/?h={{branch}}&amp;id={{commit}}">{{commit}}</a>
+            </td>
+            <td>{{platform}}/{{type}}</td>
+            <td><a href="{{name}}/{{name}}.exe" onClick="addDl('{{name}}')">Download</a></td>
+        </tr>
+{{/builds}}
+    </tbody>
+
+</table>
